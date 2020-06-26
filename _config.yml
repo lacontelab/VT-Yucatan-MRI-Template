@@ -8,4 +8,4 @@ theme: jekyll-theme-cayman
 github:
   zip_url: https://lacontelab.org/tmp.txt
   tar_url: https://lacontelab.org/tmp.txt
-  repository_url: https://github.com/lacontelab/jekyll-test
+  repository_url: https://github.com/lacontelab/test-ghpages
