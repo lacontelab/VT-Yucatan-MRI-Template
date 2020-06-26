@@ -1,0 +1,11 @@
+title: VT Yucatan Brain Template
+logo: /assets/images/VT.jpeg
+description: Click below to download
+show_downloads: true
+google_analytics:
+theme: jekyll-theme-cayman
+
+github:
+  zip_url: https://lacontelab.org/tmp.txt
+  tar_url: https://lacontelab.org/tmp.txt
+  repository_url: https://github.com/lacontelab/jekyll-test
