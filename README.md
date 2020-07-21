@@ -17,4 +17,4 @@ produced templates that have high gray-white matter contrast and demonstrate sup
 The code is distributed under [GNU General Public License](https://fsf.org/) and the [MRI data as well as derivatives](/lacontelab/VT-Yucatan-MRI-Template/releases) under the [Creative Commons](https://creativecommons.org/licenses/by-nc-sa/3.0/us) license.
 
 ## Requirements
-MRI processing is perfomed using [AFNI](https://afni.nimh.nih.gov/) and [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki). [GNU Parallel](https://www.gnu.org/software/parallel/) is used for load balance.
+MRI processing is perfomed with [AFNI](https://afni.nimh.nih.gov/) and [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki). [GNU Parallel](https://www.gnu.org/software/parallel/) is used for load balance.
