@@ -21,7 +21,7 @@
 #                                                                           #
 #############################################################################
 
-TAR_GZ_URL='https://github.com/lacontelab/VT-Yucatan-MRI-Template/releases/download/v0.1/MRI_n72_skullstripped_AFNI_v0.1.tar.gz'
+TAR_GZ_URL='https://github.com/lacontelab/VT-Yucatan-MRI-Template/releases/download/v0.1/MRI_data_n70_AFNI_v0.1.tar.gz'
 
 # id of subject for initial alignment 
 TEMPLATE_ID=8118
