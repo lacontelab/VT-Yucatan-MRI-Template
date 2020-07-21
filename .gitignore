@@ -1,2 +1,5 @@
 .sass-cache/
 .jekyll-cache/
+
+*.swp
+*.swo

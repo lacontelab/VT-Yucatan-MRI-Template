@@ -1,11 +1,12 @@
 title: VT Yucatan Brain Template
 logo: /assets/images/VT.jpeg
-description: Click below to download
+description:
 show_downloads: true
 google_analytics:
 theme: jekyll-theme-cayman
 
 github:
-  zip_url: https://lacontelab.org/tmp.txt
-  tar_url: https://lacontelab.org/tmp.txt
   repository_url: https://github.com/lacontelab/VT-Yucatan-MRI-Template
+  paper_url: https://www.biorxiv.org/
+  tar_url: https://github.com/lacontelab/VT-Yucatan-MRI-Template/releases/download/v0.1.0/VT_Yucatan_MRI_templates_v0.1.tar.gz
+
