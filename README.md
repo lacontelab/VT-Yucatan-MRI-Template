@@ -1,6 +1,6 @@
 ## VT-Yucatan-MRI-Template
 This repository contains the shell scripts that were used to analyze the data published by **Norris et. al (2020), MRI Brain Templates of the Male Yucatan Minipig**, 
-currenlty available as pre-print on [bioRxiv](https://www.biorxiv.org/). 
+currenlty available as pre-print on [bioRxiv](https://www.biorxiv.org/content/10.1101/2020.07.17.209064v1). 
 
 ## Abstract ##
 The pig is growing in popularity as an experimental animal because its gyrencephalic brain is similar to humans. 
