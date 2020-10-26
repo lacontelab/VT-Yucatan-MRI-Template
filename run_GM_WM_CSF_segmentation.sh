@@ -65,16 +65,16 @@ if [ ! -f $LIST_FILE ]; then
 fi
 
 script_name="$(basename ${0%%.sh})"
+jobdir=$OUT_PATH/jobs
 joblist_file=$(pwd)/joblist_${script_name}.txt
-jobdir=$(pwd)/jobs
+
+if [ ! -d $jobdir ]; then
+  mkdir $jobdir
+fi
 
 if [ -f $joblist_file ]; then
   echo "ERROR: Job with joblist: $joblist_file already running!"
   exit 1
-fi
-
-if [ ! -d $jobdir ]; then
-  mkdir $jobdir
 fi
 
 # create joblist
