@@ -21,13 +21,15 @@
 #                                                                           #
 #############################################################################
 
-TAR_GZ_URL='https://github.com/lacontelab/VT-Yucatan-MRI-Template/releases/download/v0.1/MRI_data_n70_AFNI_v0.1.tar.gz'
+TAR_GZ_URL='https://github.com/lacontelab/VT-Yucatan-MRI-Template/releases/download/v0.1/MRI_data_n70_AFNI_v0.1.1.tar.gz'
 
 # id of subject for initial alignment 
-TEMPLATE_ID=8118
+TEMPLATE_ID='8118' # median
+#TEMPLATE_ID='8213'   # lightest 18.1 kg
+#TEMPLATE_ID='53095'  # heaviest 30.3 kg
 
 # output directory 
-DATA_PATH=$(pwd)/data
+DATA_PATH=$(pwd)/data_${TEMPLATE_ID}
 
 # set specific AFNI version
 export PATH=/opt/afni/bin_AFNI_20.05.04/:$PATH
@@ -51,7 +53,9 @@ if [ ! -d $DATA_PATH ]; then
 fi
 
 ## segmentation into tissue types #############################################
-./run_GM_WM_CSF_segmentation.sh $DATA_PATH t1_ss acpc 
+## this is commented out by default, since data is released with tissue 
+## tissue probability maps
+#./run_GM_WM_CSF_segmentation.sh $DATA_PATH t1_ss acpc 
 
 ## iteration 0 ################################################################
 # make sure initial subject for alignment is set up
@@ -73,11 +77,15 @@ TNL_i1_prefix=${DATA_PATH}/templates/TL0N1n58
 
 # non-linear
 ./run_nonlinear_alignment.sh ids_template_n58.txt $DATA_PATH ${TL_i0_prefix}+tlrc
-./create_template.sh ids_template_n58.txt $DATA_PATH t1_ss_un_linear_$(basename $TL_i0_prefix)+tlrc $TNL_i1_prefix
+./create_template.sh ids_template_n58.txt $DATA_PATH t1_ss_un_nonlinear_$(basename $TL_i0_prefix)+tlrc $TNL_i1_prefix
 
 # validate using out-of-template subjects (n=12) [optional]
 ./run_linear_alignment.sh ids_validation_n12.txt $DATA_PATH ${TL_i0_prefix}+tlrc
 ./run_nonlinear_alignment.sh ids_validation_n12.txt $DATA_PATH ${TL_i0_prefix}+tlrc
+
+# extract landmark locations before and after alignment [optional] 
+./extract_landmark_coordinates.sh ids_n70.txt $DATA_PATH $(basename ${TL_i0_prefix}) linear
+./extract_landmark_coordinates.sh ids_n70.txt $DATA_PATH $(basename ${TL_i0_prefix}) nonlinear
 
 ## iteration 2 ################################################################
 TL_i2_prefix=${DATA_PATH}/templates/TL0L1L2n58
@@ -90,12 +98,16 @@ TNL_i2_prefix=${DATA_PATH}/templates/TL0N1N2n58
 # Keep in mind: Need to run linear first. Non-linear uses linear as starting point 
 ./run_linear_alignment.sh ids_template_n58.txt $DATA_PATH ${TNL_i1_prefix}+tlrc
 ./run_nonlinear_alignment.sh ids_template_n58.txt $DATA_PATH ${TNL_i1_prefix}+tlrc
-./create_template.sh ids_template_n58.txt $DATA_PATH t1_ss_un_linear_$(basename $TNL_i1_prefix)+tlrc $TNL_i2_prefix
+./create_template.sh ids_template_n58.txt $DATA_PATH t1_ss_un_nonlinear_$(basename $TNL_i1_prefix)+tlrc $TNL_i2_prefix
 
 # validate using out-of-template subjects (n=12) [optional]
 ./run_linear_alignment.sh ids_validation_n12.txt $DATA_PATH ${TL_i1_prefix}+tlrc
 ./run_linear_alignment.sh ids_validation_n12.txt $DATA_PATH ${TNL_i1_prefix}+tlrc
 ./run_nonlinear_alignment.sh ids_validation_n12.txt $DATA_PATH ${TNL_i1_prefix}+tlrc
+
+# extract landmark locations before and after alignment [optional] 
+./extract_landmark_coordinates.sh ids_n70.txt $DATA_PATH $(basename ${TL_i1_prefix}) linear
+./extract_landmark_coordinates.sh ids_n70.txt $DATA_PATH $(basename ${TNL_i1_prefix}) nonlinear
 
 ## iteration 3 ################################################################
 TL_i3_prefix=${DATA_PATH}/templates/TL0L1L2L3n58
@@ -108,9 +120,13 @@ TNL_i3_prefix=${DATA_PATH}/templates/TL0N1N2N3n58
 # Keep in mind: Need to run linear first. Non-linear uses linear as starting point 
 ./run_linear_alignment.sh ids_template_n58.txt $DATA_PATH ${TNL_i2_prefix}+tlrc
 ./run_nonlinear_alignment.sh ids_template_n58.txt $DATA_PATH ${TNL_i2_prefix}+tlrc
-./create_template.sh ids_template_n58.txt $DATA_PATH t1_ss_un_linear_$(basename $TNL_i2_prefix)+tlrc $TNL_i3_prefix
+./create_template.sh ids_template_n58.txt $DATA_PATH t1_ss_un_nonlinear_$(basename $TNL_i2_prefix)+tlrc $TNL_i3_prefix
 
 # validate using out-of-template subjects (n=12) [optional]
 ./run_linear_alignment.sh ids_validation_n12.txt $DATA_PATH ${TL_i2_prefix}+tlrc
 ./run_linear_alignment.sh ids_validation_n12.txt $DATA_PATH ${TNL_i2_prefix}+tlrc
 ./run_nonlinear_alignment.sh ids_validation_n12.txt $DATA_PATH ${TNL_i2_prefix}+tlrc
+
+# extract landmark locations before and after alignment [optional] 
+./extract_landmark_coordinates.sh ids_n70.txt $DATA_PATH $(basename ${TL_i2_prefix}) linear
+./extract_landmark_coordinates.sh ids_n70.txt $DATA_PATH $(basename ${TNL_i2_prefix}) nonlinear

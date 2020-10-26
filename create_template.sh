@@ -43,17 +43,24 @@ if [ ! -f $LIST_FILE ]; then
 fi
 
 if [ -f ${OUTPUT_PREFIX}+tlrc.HEAD ]; then
-  echo "ERROR: Output dataset: ${OUTPUT_PREFIX}+tlrc already exists!"
-  exit 1
+  echo "WARNING: Output dataset: ${OUTPUT_PREFIX}+tlrc already exists! Please remove first!"
+  exit 0
 fi
+
 dsets=''
+m=0
 for id in $(cat $LIST_FILE); do
   if [ ! -f $INPUT_PATH/$id/${INPUT_DSET}.HEAD ]; then
-    echo "ERROR ($0): Input dataset: $INPUT_PATH/$id/$INPUT_DSET does not exist!"
-    exit 1
+    echo "WARNING: Input dataset: $INPUT_PATH/$id/$INPUT_DSET does not exist!"
+    m=$(($m+1))
   fi
   dsets="$dsets $INPUT_PATH/$id/$INPUT_DSET"
 done
+
+if [ $m -gt 0 ]; then 
+  echo "ERROR: ${INPUT_DSET} missing for $m (out of $(cat $LIST_FILE | wc -l)) subjects. Abort." 
+  exit 1
+fi
 
 3dMean -datum float -prefix ${OUTPUT_PREFIX} $dsets
 

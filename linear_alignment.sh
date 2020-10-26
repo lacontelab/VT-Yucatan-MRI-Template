@@ -233,7 +233,7 @@ if [ "$template_dir" != "templates" ]; then
 fi
          
 ## linear alignment ############################################################
-# figure template name
+# figure out template name
 name=$(basename $TEMPLATE_DSET)
 if [ ${name: -4} != 'tlrc' ]; then
  log_error_exit "Template dataset: $TEMPLATE_DSET be in +tlrc view" "$log_file"
@@ -262,6 +262,33 @@ if [ ! -f ${out_prefix}+tlrc.HEAD ]; then
 else
    log_warning_message "Output file: ${out_prefix}+tlrc.HEAD already exists!" "$log_file"
 fi
+
+# apply linear alignment to other datasets 
+for in_prefix in ${ALIGN_PREFIX[@]}; do
+
+  out_prefix=${in_prefix}_linear_${template_name}
+  log_info_message ".. Applying linear transformation  to: ${in_prefix}" "L1" "$log_file"
+
+  if [ ! -f ${in_prefix}+acpc.HEAD ]; then
+    log_warning_message "Input file: ${in_prefix}+tlrc does not exist!" "$log_file"
+    continue
+  fi
+
+  if [ ! -f ${out_prefix}+tlrc.HEAD ]; then
+    3dAllineate \
+      -prefix ${out_prefix} \
+      -base $TEMPLATE_DSET \
+      -1Dmatrix_apply ${xform_tpl_to_t1_affine} \
+      -input ${in_prefix}+acpc \
+      -final wsinc5 >> $log_file 2>&1
+
+    if [ $? -ne 0 ]; then
+      log_error_exit "3dAllineate failed!" "$log_file"
+    fi
+  else
+     log_warning_message "Output file: ${out_prefix}+tlrc already exists!" "$log_file"
+  fi
+done
 
 ###############################################################################
 ### Finish ####################################################################
