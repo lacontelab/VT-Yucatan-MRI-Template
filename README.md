@@ -14,7 +14,7 @@ Although our T1-weighted data were resolution limited, we preserved effective re
 produced templates that have high gray-white matter contrast and demonstrate superior registration accuracy compared to the only known alternative minipig template
 
 ## License ##
-The code is distributed under [GNU General Public License](https://fsf.org/) and the [MRI data as well as derivatives](/lacontelab/VT-Yucatan-MRI-Template/releases) under the [Creative Commons](https://creativecommons.org/licenses/by-nc-sa/3.0/us) license.
+The code is distributed under [GNU General Public License](https://fsf.org/) and the [MRI data as well as derivatives](https://github.com/lacontelab/VT-Yucatan-MRI-Template/releases/download/v0.1.1/MRI_data_n70_AFNI_v0.1.tar.gz) under the [Creative Commons](https://creativecommons.org/licenses/by-nc-sa/3.0/us) license.
 
 ## Requirements
 MRI processing is perfomed with [AFNI](https://afni.nimh.nih.gov/) and [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki). [GNU Parallel](https://www.gnu.org/software/parallel/) is used for load balance.
