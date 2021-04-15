@@ -7,6 +7,6 @@ theme: jekyll-theme-cayman
 
 github:
   repository_url: https://github.com/lacontelab/VT-Yucatan-MRI-Template
-  paper_url: https://www.biorxiv.org/content/10.1101/2020.07.17.209064v1
+  paper_url: https://doi.org/10.1016/j.neuroimage.2021.118015
   tar_url: https://github.com/lacontelab/VT-Yucatan-MRI-Template/releases/download/v0.1.0/VT_Yucatan_MRI_templates_v0.1.tar.gz
 
